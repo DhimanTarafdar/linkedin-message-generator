@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import MessageCard from './MessageCard';
+import { FormInput, inputClass, inputStyle } from './FormField';
 import { buildReplyPrompt } from '@/utils/promptBuilder';
+
 
 export default function ReplyTab() {
   const [replyData, setReplyData] = useState({
@@ -88,63 +90,90 @@ export default function ReplyTab() {
 
   const isFormValid = replyData.receivedMessage && replyData.yourName;
 
+  const replyTypeLabels = {
+    thank_you_followup: '🙏 Thank You + Follow-up',
+    requesting_meeting: '📅 Requesting Meeting',
+    asking_advice: '💡 Asking Advice',
+    sharing_update: '📈 Sharing Update',
+    expressing_interest: '✨ Expressing Interest',
+    requesting_feedback: '📝 Requesting Feedback',
+  };
+  const replyTypeDescriptions = {
+    thank_you_followup: 'তাদের advice এর জন্য ধন্যবাদ দিয়ে একটা thoughtful follow-up question করবে',
+    requesting_meeting: 'তাদের সাথে একটা meeting/call request করবে',
+    asking_advice: 'Specific advice চাইবে কোনো বিষয়ে',
+    sharing_update: 'তোমার progress/update share করবে',
+    expressing_interest: 'কোনো opportunity তে interest দেখাবে',
+    requesting_feedback: 'তোমার work এ feedback চাইবে',
+  };
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
       {/* Left Column - Input */}
-      <div className="bg-white rounded-2xl shadow-xl p-6">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-          <span className="text-3xl mr-3">↩️</span>
+      <section
+        className="rounded-2xl p-5"
+        style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}
+      >
+        <h2 className="text-base font-bold mb-1 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style={{ color: 'var(--primary)' }} aria-hidden="true">
+            <path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z" />
+          </svg>
           Reply to Message
         </h2>
-        <p className="text-sm text-gray-600 mb-6 bg-blue-50 p-3 rounded-lg border-l-4 border-blue-500">
+        <p className="text-xs mb-4 px-3 py-2 rounded-lg" style={{ color: 'var(--text-secondary)', background: 'var(--primary-light)' }}>
           💡 তুমি যে message পেয়েছো সেটা paste করো এবং reply type select করো
         </p>
 
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
-              Your Name (তোমার নাম) *
-            </label>
+        <div className="space-y-3.5">
+          <FormInput label="Your Name (তোমার নাম)" required>
             <input
               type="text"
               name="yourName"
               value={replyData.yourName}
               onChange={handleReplyChange}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition"
+              className={inputClass}
+              style={inputStyle}
               placeholder="e.g., Dhiman Tarafdar"
+              onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+              onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
             />
-          </div>
+          </FormInput>
 
-          <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
-              Received Message (যে message পেয়েছো) *
-            </label>
+          <FormInput
+            label="Received Message (যে message পেয়েছো)"
+            required
+            hint="LinkedIn, Email বা যেকোনো platform এর message এখানে paste করো"
+          >
             <textarea
               name="receivedMessage"
               value={replyData.receivedMessage}
               onChange={handleReplyChange}
               rows="8"
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition"
-              placeholder="তুমি যে message receive করেছো সেটা এখানে paste করো...
+              className={inputClass}
+              style={{ ...inputStyle, resize: 'vertical' }}
+              placeholder={`তুমি যে message receive করেছো সেটা এখানে paste করো...
 
 Example:
 Hi Dhiman,
-It's great that you're already exploring PyTorch. At this stage, I'd recommend focusing on building a few solid end-to-end projects rather than just learning theory..."
+It's great that you're already exploring PyTorch. At this stage, I'd recommend focusing on building a few solid end-to-end projects rather than just learning theory...`}
+              onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+              onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
             />
-            <p className="text-xs text-gray-500 mt-1">
-              LinkedIn, Email বা যেকোনো platform এর message এখানে paste করো
-            </p>
-          </div>
+          </FormInput>
 
-          <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
-              Reply Type (কি ধরনের reply চাও) *
-            </label>
+          <FormInput
+            label="Reply Type (কি ধরনের reply চাও)"
+            required
+            hint="তোমার উদ্দেশ্য অনুযায়ী select করো"
+          >
             <select
               name="replyType"
               value={replyData.replyType}
               onChange={handleReplyChange}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition"
+              className={inputClass}
+              style={inputStyle}
+              onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+              onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
             >
               <option value="thank_you_followup">🙏 Thank You + Follow-up Question</option>
               <option value="requesting_meeting">📅 Requesting Meeting/Call</option>
@@ -153,106 +182,116 @@ It's great that you're already exploring PyTorch. At this stage, I'd recommend f
               <option value="expressing_interest">✨ Expressing Interest in Opportunity</option>
               <option value="requesting_feedback">📝 Requesting Feedback on Work</option>
             </select>
-            <p className="text-xs text-gray-500 mt-1">
-              তোমার উদ্দেশ্য অনুযায়ী select করো
+          </FormInput>
+
+          {/* Reply Type Info */}
+          <div
+            className="px-4 py-3 rounded-xl"
+            style={{ background: 'var(--primary-light)', border: '1px solid var(--border)' }}
+          >
+            <p className="text-xs font-semibold mb-0.5" style={{ color: 'var(--primary)' }}>
+              {replyTypeLabels[replyData.replyType]}
+            </p>
+            <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+              {replyTypeDescriptions[replyData.replyType]}
             </p>
           </div>
 
-          <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
-              Additional Context (অতিরিক্ত তথ্য - optional)
-            </label>
+          <FormInput
+            label="Additional Context (অতিরিক্ত তথ্য)"
+            hint="GitHub link, portfolio, বা specific questions যোগ করতে পারো"
+          >
             <textarea
               name="context"
               value={replyData.context}
               onChange={handleReplyChange}
               rows="3"
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition"
-              placeholder="যেমন: 
-- GitHub: https://github.com/username
-- Portfolio: https://myportfolio.com
-- Specific questions you want to ask
-- Any additional information"
+              className={inputClass}
+              style={{ ...inputStyle, resize: 'vertical' }}
+              placeholder={`যেমন: \n- GitHub: https://github.com/username\n- Portfolio: https://myportfolio.com\n- Specific questions you want to ask`}
+              onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+              onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
             />
-            <p className="text-xs text-gray-500 mt-1">
-              GitHub link, portfolio, বা specific questions যোগ করতে পারো
-            </p>
-          </div>
-
-          {/* Reply Type Info Box */}
-          <div className="bg-purple-50 border-2 border-purple-200 rounded-xl p-4">
-            <h3 className="text-sm font-bold text-purple-800 mb-2">
-              {replyData.replyType === 'thank_you_followup' && '🙏 Thank You + Follow-up'}
-              {replyData.replyType === 'requesting_meeting' && '📅 Requesting Meeting'}
-              {replyData.replyType === 'asking_advice' && '💡 Asking Advice'}
-              {replyData.replyType === 'sharing_update' && '📈 Sharing Update'}
-              {replyData.replyType === 'expressing_interest' && '✨ Expressing Interest'}
-              {replyData.replyType === 'requesting_feedback' && '📝 Requesting Feedback'}
-            </h3>
-            <p className="text-xs text-purple-700">
-              {replyData.replyType === 'thank_you_followup' && 'তাদের advice এর জন্য ধন্যবাদ দিয়ে একটা thoughtful follow-up question করবে'}
-              {replyData.replyType === 'requesting_meeting' && 'তাদের সাথে একটা meeting/call request করবে'}
-              {replyData.replyType === 'asking_advice' && 'Specific advice চাইবে কোনো বিষয়ে'}
-              {replyData.replyType === 'sharing_update' && 'তোমার progress/update share করবে'}
-              {replyData.replyType === 'expressing_interest' && 'কোনো opportunity তে interest দেখাবে'}
-              {replyData.replyType === 'requesting_feedback' && 'তোমার work এ feedback চাইবে'}
-            </p>
-          </div>
+          </FormInput>
 
           {/* Generate Button */}
           <button
             onClick={generateReply}
             disabled={loading || !isFormValid}
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-5 rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-[1.02] shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            className="w-full font-semibold py-3.5 rounded-full transition-all text-base flex items-center justify-center gap-2"
+            style={{
+              background: isFormValid && !loading ? 'var(--primary)' : undefined,
+              backgroundColor: !isFormValid || loading ? '#94b8d8' : undefined,
+              color: '#fff',
+              cursor: loading || !isFormValid ? 'not-allowed' : 'pointer',
+              boxShadow: isFormValid && !loading ? 'var(--shadow-md)' : 'none',
+            }}
           >
             {loading ? (
-              <span className="flex items-center justify-center">
-                <svg className="animate-spin h-6 w-6 mr-3" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+              <>
+                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                 </svg>
                 AI Reply তৈরি করছে...
-              </span>
+              </>
             ) : (
-              <span className="flex items-center justify-center text-lg">
-                <span className="text-2xl mr-3">⚡</span>
+              <>
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+                  <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
                 Generate Reply
-              </span>
+              </>
             )}
           </button>
         </div>
-      </div>
+      </section>
 
       {/* Right Column - Output */}
-      <div className="bg-white rounded-2xl shadow-xl p-6 lg:p-8 sticky top-6 h-fit">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-          <span className="text-3xl mr-3">✨</span>
+      <div
+        className="rounded-2xl p-5 lg:p-6 sticky top-6 h-fit"
+        style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}
+      >
+        <h2 className="text-base font-bold mb-4 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style={{ color: 'var(--primary)' }} aria-hidden="true">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14l4-4h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+          </svg>
           Generated Replies
         </h2>
 
         {error && (
-          <div className="bg-red-50 border-2 border-red-200 rounded-xl p-6 text-center">
-            <div className="text-5xl mb-3">⚠️</div>
-            <h3 className="text-lg font-semibold text-red-800 mb-2">Error!</h3>
-            <p className="text-red-600 text-sm">{error}</p>
-            <button
-              onClick={() => setError(null)}
-              className="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
-            >
-              Close
-            </button>
+          <div className="rounded-xl p-4 mb-4" style={{ background: 'var(--error-light)', border: '1px solid #f5c6c6' }}>
+            <div className="flex items-start gap-3">
+              <span className="text-xl shrink-0">⚠️</span>
+              <div className="flex-1">
+                <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--error)' }}>Error</h3>
+                <p className="text-sm" style={{ color: 'var(--error)' }}>{error}</p>
+              </div>
+              <button
+                onClick={() => setError(null)}
+                className="text-xs font-semibold px-3 py-1.5 rounded-full transition-all"
+                style={{ background: 'var(--error)', color: '#fff' }}
+              >
+                Dismiss
+              </button>
+            </div>
           </div>
         )}
 
         {!replyMessages && !loading && !error && (
-          <div className="text-center py-16 text-gray-400">
-            <div className="text-7xl mb-4">💬</div>
-            <p className="text-xl font-medium mb-3">এখনো reply তৈরি হয়নি</p>
-            <p className="text-sm mb-6">
+          <div className="text-center py-14" style={{ color: 'var(--text-muted)' }}>
+            <div className="text-5xl mb-4">💬</div>
+            <p className="text-base font-semibold mb-2" style={{ color: 'var(--text-secondary)' }}>
+              এখনো reply তৈরি হয়নি
+            </p>
+            <p className="text-sm mb-5">
               Received message এবং your name দাও, তারপর Generate Reply click করো
             </p>
-            <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-xl border border-gray-200">
-              <p className="text-xs text-gray-600">
+            <div
+              className="px-4 py-3 rounded-xl text-left"
+              style={{ background: 'var(--primary-light)', border: '1px solid var(--border)' }}
+            >
+              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
                 <strong>Example:</strong> তোমার boss বা HR যদি advice দিয়ে reply করে,
                 সেটা এখানে paste করো এবং professional reply পাবে! 🎯
               </p>
@@ -261,20 +300,33 @@ It's great that you're already exploring PyTorch. At this stage, I'd recommend f
         )}
 
         {loading && (
-          <div className="text-center py-16">
-            <div className="inline-block animate-spin rounded-full h-20 w-20 border-b-4 border-purple-600 mb-6"></div>
-            <p className="text-gray-700 font-bold text-lg mb-2">AI reply তৈরি করছে...</p>
-            <p className="text-sm text-gray-500">
+          <div className="text-center py-14">
+            <div
+              className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-5"
+              style={{ background: 'var(--primary-light)' }}
+            >
+              <svg className="animate-spin h-8 w-8" viewBox="0 0 24 24" fill="none" aria-label="Loading" style={{ color: 'var(--primary)' }}>
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+              </svg>
+            </div>
+            <p className="font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>AI reply তৈরি করছে...</p>
+            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
               Professional এবং personalized reply লিখছে...
             </p>
           </div>
         )}
 
         {replyMessages && (
-          <div className="space-y-6">
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-xl border-2 border-green-200">
-              <p className="text-sm text-gray-700 font-medium flex items-center">
-                <span className="text-2xl mr-2">✅</span>
+          <div className="space-y-4">
+            <div
+              className="flex items-center gap-2 px-4 py-3 rounded-xl"
+              style={{ background: 'var(--success-light)', border: '1px solid #b8dfc8' }}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style={{ color: 'var(--success)' }} aria-hidden="true">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+              </svg>
+              <p className="text-sm font-medium" style={{ color: 'var(--success)' }}>
                 {replyMessages.length}টি Reply তৈরি হয়েছে!
               </p>
             </div>
@@ -289,9 +341,12 @@ It's great that you're already exploring PyTorch. At this stage, I'd recommend f
               />
             ))}
 
-            <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4">
-              <p className="text-sm text-gray-700 flex items-start">
-                <span className="text-2xl mr-3">💡</span>
+            <div
+              className="px-4 py-3 rounded-xl"
+              style={{ background: 'var(--warning-light)', border: '1px solid #fde8b1' }}
+            >
+              <p className="text-xs flex items-start gap-2" style={{ color: 'var(--warning)' }}>
+                <span className="text-base shrink-0">💡</span>
                 <span>
                   <strong>Pro Tip:</strong> Reply পাঠানোর আগে একবার পড়ে নিন এবং
                   নিজের মতো করে customize করুন। Personal touch যোগ করলে আরো ভালো!

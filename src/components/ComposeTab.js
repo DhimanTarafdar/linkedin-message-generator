@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import MessageCard from './MessageCard';
+import { FormInput, inputClass, inputStyle } from './FormField';
 import { buildConnectionRequestPrompt, buildDirectMessagePrompt } from '@/utils/promptBuilder';
+
 
 export default function ComposeTab() {
   const [messageType, setMessageType] = useState('connection_request');
@@ -101,195 +103,241 @@ export default function ComposeTab() {
     senderData.company && senderData.background;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
       {/* Left Column - Input */}
-      <div className="space-y-6">
+      <div className="space-y-4">
+
         {/* Message Type Selection */}
-        <div className="bg-white rounded-2xl shadow-xl p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
-            <span className="text-2xl mr-3">📨</span>
+        <section
+          className="rounded-2xl p-5"
+          style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}
+        >
+          <h2 className="text-base font-bold mb-3 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style={{ color: 'var(--primary)' }} aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+            </svg>
             Message Type নির্বাচন করুন
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button
               onClick={() => setMessageType('connection_request')}
-              className={`p-6 rounded-xl border-2 transition-all transform hover:scale-[1.02] ${messageType === 'connection_request'
-                  ? 'border-blue-600 bg-blue-50 shadow-lg'
-                  : 'border-gray-200 hover:border-blue-300'
-                }`}
+              className="p-4 rounded-xl text-left transition-all"
+              style={
+                messageType === 'connection_request'
+                  ? { border: '2px solid var(--primary)', background: 'var(--primary-light)' }
+                  : { border: '1.5px solid var(--border)', background: 'var(--card-bg)' }
+              }
             >
-              <div className="flex items-start">
-                <div className="text-4xl mr-4">🤝</div>
-                <div className="text-left">
-                  <h3 className="text-lg font-bold text-gray-800 mb-1">Connection Request Note</h3>
-                  <p className="text-sm text-gray-600">প্রথম connection পাঠানোর সময় (300 chars limit)</p>
-                  <div className="mt-2 text-xs bg-blue-100 text-blue-700 inline-block px-3 py-1 rounded-full">
-                    50-60 words max
-                  </div>
-                </div>
-              </div>
+              <div className="text-2xl mb-2">🤝</div>
+              <h3 className="text-sm font-bold mb-0.5" style={{ color: 'var(--text-primary)' }}>
+                Connection Request Note
+              </h3>
+              <p className="text-xs mb-2" style={{ color: 'var(--text-secondary)' }}>
+                প্রথম connection পাঠানোর সময় (300 chars limit)
+              </p>
+              <span
+                className="text-xs font-semibold px-2.5 py-0.5 rounded-full"
+                style={{ background: 'var(--primary-light)', color: 'var(--primary)' }}
+              >
+                50-60 words max
+              </span>
             </button>
 
             <button
               onClick={() => setMessageType('direct_message')}
-              className={`p-6 rounded-xl border-2 transition-all transform hover:scale-[1.02] ${messageType === 'direct_message'
-                  ? 'border-purple-600 bg-purple-50 shadow-lg'
-                  : 'border-gray-200 hover:border-purple-300'
-                }`}
+              className="p-4 rounded-xl text-left transition-all"
+              style={
+                messageType === 'direct_message'
+                  ? { border: '2px solid var(--primary)', background: 'var(--primary-light)' }
+                  : { border: '1.5px solid var(--border)', background: 'var(--card-bg)' }
+              }
             >
-              <div className="flex items-start">
-                <div className="text-4xl mr-4">💬</div>
-                <div className="text-left">
-                  <h3 className="text-lg font-bold text-gray-800 mb-1">Direct Message</h3>
-                  <p className="text-sm text-gray-600">Already connected হলে concise message পাঠান</p>
-                  <div className="mt-2 text-xs bg-purple-100 text-purple-700 inline-block px-3 py-1 rounded-full">
-                    80-150 words
-                  </div>
-                </div>
-              </div>
+              <div className="text-2xl mb-2">💬</div>
+              <h3 className="text-sm font-bold mb-0.5" style={{ color: 'var(--text-primary)' }}>
+                Direct Message
+              </h3>
+              <p className="text-xs mb-2" style={{ color: 'var(--text-secondary)' }}>
+                Already connected হলে concise message পাঠান
+              </p>
+              <span
+                className="text-xs font-semibold px-2.5 py-0.5 rounded-full"
+                style={{ background: 'var(--primary-light)', color: 'var(--primary)' }}
+              >
+                80-150 words
+              </span>
             </button>
           </div>
-        </div>
+        </section>
 
         {/* Recipient Information */}
-        <div className="bg-white rounded-2xl shadow-xl p-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-            <span className="text-3xl mr-3">👤</span>
+        <section
+          className="rounded-2xl p-5"
+          style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}
+        >
+          <h2 className="text-base font-bold mb-1 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style={{ color: 'var(--primary)' }} aria-hidden="true">
+              <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
+            </svg>
             যাকে Message পাঠাবেন
           </h2>
-          <p className="text-sm text-gray-600 mb-6 bg-blue-50 p-3 rounded-lg border-l-4 border-blue-500">
+          <p className="text-xs mb-4 px-3 py-2 rounded-lg" style={{ color: 'var(--text-secondary)', background: 'var(--primary-light)' }}>
             💡 LinkedIn profile থেকে এই তথ্যগুলো দেখে নিয়ে এখানে লিখুন
           </p>
 
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Name (নাম) *</label>
+          <div className="space-y-3.5">
+            <FormInput label="Name (নাম)" required>
               <input
                 type="text"
                 name="name"
                 value={recipientData.name}
                 onChange={handleRecipientChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                className={inputClass}
+                style={inputStyle}
                 placeholder="e.g., Sarah Ahmed"
+                onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+                onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
               />
-            </div>
+            </FormInput>
 
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Job Title (পদবি) *</label>
+            <FormInput label="Job Title (পদবি)" required>
               <input
                 type="text"
                 name="jobTitle"
                 value={recipientData.jobTitle}
                 onChange={handleRecipientChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                className={inputClass}
+                style={inputStyle}
                 placeholder="e.g., Senior Product Manager"
+                onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+                onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
               />
-            </div>
+            </FormInput>
 
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Company (কোম্পানি) *</label>
+            <FormInput label="Company (কোম্পানি)" required>
               <input
                 type="text"
                 name="company"
                 value={recipientData.company}
                 onChange={handleRecipientChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                className={inputClass}
+                style={inputStyle}
                 placeholder="e.g., Google, Microsoft, Startup Name"
+                onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+                onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
               />
-            </div>
+            </FormInput>
 
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Key Skills/Expertise (দক্ষতা)</label>
+            <FormInput label="Key Skills/Expertise (দক্ষতা)">
               <input
                 type="text"
                 name="skills"
                 value={recipientData.skills}
                 onChange={handleRecipientChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                className={inputClass}
+                style={inputStyle}
                 placeholder="e.g., AI/ML, Product Strategy"
+                onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+                onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
               />
-            </div>
+            </FormInput>
 
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Recent Activity/Posts (সাম্প্রতিক পোস্ট)</label>
+            <FormInput label="Recent Activity/Posts (সাম্প্রতিক পোস্ট)">
               <textarea
                 name="recentActivity"
                 value={recipientData.recentActivity}
                 onChange={handleRecipientChange}
                 rows="3"
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                className={inputClass}
+                style={{ ...inputStyle, resize: 'vertical' }}
                 placeholder="e.g., সম্প্রতি AI-powered feature নিয়ে post করেছেন..."
+                onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+                onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
               />
-            </div>
+            </FormInput>
           </div>
-        </div>
+        </section>
 
         {/* Sender Information */}
-        <div className="bg-white rounded-2xl shadow-xl p-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-            <span className="text-3xl mr-3">🙋‍♂️</span>
+        <section
+          className="rounded-2xl p-5"
+          style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}
+        >
+          <h2 className="text-base font-bold mb-1 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style={{ color: 'var(--primary)' }} aria-hidden="true">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+            </svg>
             আপনার তথ্য
           </h2>
-          <p className="text-sm text-gray-600 mb-6 bg-green-50 p-3 rounded-lg border-l-4 border-green-500">
+          <p className="text-xs mb-4 px-3 py-2 rounded-lg" style={{ color: 'var(--text-secondary)', background: '#f0faf4' }}>
             💡 আপনার সম্পর্কে এবং কেন message পাঠাচ্ছেন সেটা বলুন
           </p>
 
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Your Name (আপনার নাম) *</label>
+          <div className="space-y-3.5">
+            <FormInput label="Your Name (আপনার নাম)" required>
               <input
                 type="text"
                 name="name"
                 value={senderData.name}
                 onChange={handleSenderChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                className={inputClass}
+                style={inputStyle}
                 placeholder="e.g., Rakib Hassan"
+                onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+                onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
               />
-            </div>
+            </FormInput>
 
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Your Job Title (আপনার পদবি) *</label>
+            <FormInput label="Your Job Title (আপনার পদবি)" required>
               <input
                 type="text"
                 name="jobTitle"
                 value={senderData.jobTitle}
                 onChange={handleSenderChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                className={inputClass}
+                style={inputStyle}
                 placeholder="e.g., Software Engineer, Student"
+                onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+                onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
               />
-            </div>
+            </FormInput>
 
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Your Company (আপনার কোম্পানি) *</label>
+            <FormInput label="Your Company (আপনার কোম্পানি)" required>
               <input
                 type="text"
                 name="company"
                 value={senderData.company}
                 onChange={handleSenderChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                className={inputClass}
+                style={inputStyle}
                 placeholder="e.g., Tech Startup, University Name"
+                onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+                onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
               />
-            </div>
+            </FormInput>
 
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Your Background (আপনার পরিচয়) *</label>
+            <FormInput label="Your Background (আপনার পরিচয়)" required>
               <textarea
                 name="background"
                 value={senderData.background}
                 onChange={handleSenderChange}
                 rows="3"
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                className={inputClass}
+                style={{ ...inputStyle, resize: 'vertical' }}
                 placeholder="e.g., 3 years experience in AI/ML, passionate about product development..."
+                onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+                onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
               />
-            </div>
+            </FormInput>
 
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Purpose (উদ্দেশ্য) *</label>
+            <FormInput label="Purpose (উদ্দেশ্য)" required>
               <select
                 name="purpose"
                 value={senderData.purpose}
                 onChange={handleSenderChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                className={inputClass}
+                style={inputStyle}
+                onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+                onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
               >
                 <option value="collaboration">🤝 Collaboration খুঁজছি</option>
                 <option value="job_opportunity">💼 Job Opportunity</option>
@@ -298,73 +346,101 @@ export default function ComposeTab() {
                 <option value="knowledge_exchange">📚 Knowledge Exchange</option>
                 <option value="business_proposal">💡 Business Proposal</option>
               </select>
-            </div>
+            </FormInput>
 
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Specific Interest (নির্দিষ্ট কারণ)</label>
+            <FormInput label="Specific Interest (নির্দিষ্ট কারণ)">
               <input
                 type="text"
                 name="specificInterest"
                 value={senderData.specificInterest}
                 onChange={handleSenderChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                className={inputClass}
+                style={inputStyle}
                 placeholder="e.g., তাদের AI project সম্পর্কে জানতে চাই"
+                onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 2px rgba(10,102,194,0.15)'; }}
+                onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
               />
-            </div>
+            </FormInput>
           </div>
-        </div>
+        </section>
 
         {/* Generate Button */}
         <button
           onClick={generateMessages}
           disabled={loading || !isFormValid}
-          className="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-bold py-5 rounded-xl hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 transition-all transform hover:scale-[1.02] shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          className="w-full font-semibold py-3.5 rounded-full transition-all text-base flex items-center justify-center gap-2"
+          style={{
+            background: isFormValid && !loading ? 'var(--primary)' : undefined,
+            backgroundColor: !isFormValid || loading ? '#94b8d8' : undefined,
+            color: '#fff',
+            cursor: loading || !isFormValid ? 'not-allowed' : 'pointer',
+            boxShadow: isFormValid && !loading ? 'var(--shadow-md)' : 'none',
+          }}
         >
           {loading ? (
-            <span className="flex items-center justify-center">
-              <svg className="animate-spin h-6 w-6 mr-3" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+            <>
+              <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
               AI Message তৈরি করছে...
-            </span>
+            </>
           ) : (
-            <span className="flex items-center justify-center text-lg">
-              <span className="text-2xl mr-3">⚡</span>
+            <>
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+                <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
               {messageType === 'connection_request' ? 'Connection Request Note তৈরি করুন' : 'Direct Message তৈরি করুন'}
-            </span>
+            </>
           )}
         </button>
       </div>
 
       {/* Right Column - Output */}
-      <div className="bg-white rounded-2xl shadow-xl p-6 lg:p-8 sticky top-6 h-fit">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-          <span className="text-3xl mr-3">✨</span>
+      <div
+        className="rounded-2xl p-5 lg:p-6 sticky top-6 h-fit"
+        style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}
+      >
+        <h2 className="text-base font-bold mb-4 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style={{ color: 'var(--primary)' }} aria-hidden="true">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14l4-4h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+          </svg>
           Generated Messages
         </h2>
 
         {error && (
-          <div className="bg-red-50 border-2 border-red-200 rounded-xl p-6 text-center">
-            <div className="text-5xl mb-3">⚠️</div>
-            <h3 className="text-lg font-semibold text-red-800 mb-2">Error!</h3>
-            <p className="text-red-600 text-sm">{error}</p>
-            <button
-              onClick={() => setError(null)}
-              className="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
-            >
-              Close
-            </button>
+          <div className="rounded-xl p-4 mb-4" style={{ background: 'var(--error-light)', border: '1px solid #f5c6c6' }}>
+            <div className="flex items-start gap-3">
+              <span className="text-xl shrink-0">⚠️</span>
+              <div className="flex-1">
+                <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--error)' }}>Error</h3>
+                <p className="text-sm" style={{ color: 'var(--error)' }}>{error}</p>
+              </div>
+              <button
+                onClick={() => setError(null)}
+                className="text-xs font-semibold px-3 py-1.5 rounded-full transition-all"
+                style={{ background: 'var(--error)', color: '#fff' }}
+              >
+                Dismiss
+              </button>
+            </div>
           </div>
         )}
 
         {!messages && !loading && !error && (
-          <div className="text-center py-16 text-gray-400">
-            <div className="text-7xl mb-4">📝</div>
-            <p className="text-xl font-medium mb-3">এখনো message তৈরি হয়নি</p>
-            <p className="text-sm mb-6">উপরের সব required (*) fields পূরণ করুন এবং Generate button এ click করুন</p>
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-xl border border-gray-200">
-              <p className="text-xs text-gray-600">
+          <div className="text-center py-14" style={{ color: 'var(--text-muted)' }}>
+            <div className="text-5xl mb-4">📝</div>
+            <p className="text-base font-semibold mb-2" style={{ color: 'var(--text-secondary)' }}>
+              এখনো message তৈরি হয়নি
+            </p>
+            <p className="text-sm mb-5">
+              উপরের সব required (*) fields পূরণ করুন এবং Generate button এ click করুন
+            </p>
+            <div
+              className="px-4 py-3 rounded-xl text-left"
+              style={{ background: 'var(--primary-light)', border: '1px solid var(--border)' }}
+            >
+              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
                 <strong>Tips:</strong> যত বেশি তথ্য দেবেন, তত ভালো personalized message পাবেন! 🎯
               </p>
             </div>
@@ -372,10 +448,18 @@ export default function ComposeTab() {
         )}
 
         {loading && (
-          <div className="text-center py-16">
-            <div className="inline-block animate-spin rounded-full h-20 w-20 border-b-4 border-indigo-600 mb-6"></div>
-            <p className="text-gray-700 font-bold text-lg mb-2">AI message তৈরি করছে...</p>
-            <p className="text-sm text-gray-500">
+          <div className="text-center py-14">
+            <div
+              className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-5"
+              style={{ background: 'var(--primary-light)' }}
+            >
+              <svg className="animate-spin h-8 w-8" viewBox="0 0 24 24" fill="none" aria-label="Loading" style={{ color: 'var(--primary)' }}>
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+              </svg>
+            </div>
+            <p className="font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>AI message তৈরি করছে...</p>
+            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
               {messageType === 'connection_request'
                 ? 'সংক্ষিপ্ত এবং professional connection note লিখছে...'
                 : 'Concise এবং professional message তৈরি করছে...'}
@@ -384,10 +468,15 @@ export default function ComposeTab() {
         )}
 
         {messages && (
-          <div className="space-y-6">
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-xl border-2 border-green-200">
-              <p className="text-sm text-gray-700 font-medium flex items-center">
-                <span className="text-2xl mr-2">✅</span>
+          <div className="space-y-4">
+            <div
+              className="flex items-center gap-2 px-4 py-3 rounded-xl"
+              style={{ background: 'var(--success-light)', border: '1px solid #b8dfc8' }}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style={{ color: 'var(--success)', flexShrink: 0 }} aria-hidden="true">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+              </svg>
+              <p className="text-sm font-medium" style={{ color: 'var(--success)' }}>
                 {messageType === 'connection_request'
                   ? `${messages.length}টি Connection Request Note তৈরি হয়েছে!`
                   : `${messages.length}টি Direct Message তৈরি হয়েছে!`}
@@ -403,9 +492,12 @@ export default function ComposeTab() {
               />
             ))}
 
-            <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4">
-              <p className="text-sm text-gray-700 flex items-start">
-                <span className="text-2xl mr-3">💡</span>
+            <div
+              className="px-4 py-3 rounded-xl"
+              style={{ background: 'var(--warning-light)', border: '1px solid #fde8b1' }}
+            >
+              <p className="text-xs flex items-start gap-2" style={{ color: 'var(--warning)' }}>
+                <span className="text-base shrink-0">💡</span>
                 <span>
                   <strong>Pro Tip:</strong> Message copy করার আগে একবার পড়ে নিন এবং প্রয়োজনে নিজের মতো করে edit করে নিন।
                   {messageType === 'connection_request'

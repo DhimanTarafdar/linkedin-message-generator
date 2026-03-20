@@ -9,17 +9,28 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('compose');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4 md:p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen py-6 px-4 md:px-6" style={{ background: 'var(--background)' }}>
+      <div className="max-w-6xl mx-auto">
         <Header activeTab={activeTab} setActiveTab={setActiveTab} />
-        
+
         {activeTab === 'compose' ? <ComposeTab /> : <ReplyTab />}
 
         {/* Footer */}
-        <div className="mt-12 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-2xl shadow-2xl p-8 text-center">
-          <p className="text-gray-300 mb-2">Made with ❤️ using Claude AI</p>
-          <p className="text-sm text-gray-400">LinkedIn Message Generator v3.0 - Professional Networking Tool</p>
-        </div>
+        <footer
+          className="mt-10 rounded-2xl px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2"
+          style={{
+            background: 'var(--card-bg)',
+            border: '1px solid var(--border)',
+            boxShadow: 'var(--shadow-sm)',
+          }}
+        >
+          <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+            Made with <span style={{ color: 'var(--error)' }}>♥</span> using Claude AI
+          </p>
+          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+            LinkedIn Message Generator v3.0 · Professional Networking Tool
+          </p>
+        </footer>
       </div>
     </div>
   );

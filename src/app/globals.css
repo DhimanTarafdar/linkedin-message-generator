@@ -3,25 +3,79 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #f3f2ef;
+  --foreground: #191919;
+  --card-bg: #ffffff;
+  --border: #e0dfdc;
+  --primary: #0a66c2;
+  --primary-hover: #004182;
+  --primary-light: #dce6f0;
+  --secondary: #666666;
+  --success: #057642;
+  --success-light: #d4edda;
+  --warning: #b86800;
+  --warning-light: #fff3cd;
+  --error: #cc1016;
+  --error-light: #fce4e4;
+  --text-primary: #191919;
+  --text-secondary: #666666;
+  --text-muted: #999999;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  .input-base {
+    width: 100%;
+    padding: 0.625rem 0.875rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--card-bg);
+    color: var(--text-primary);
+    font-size: 0.9375rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    outline: none;
+  }
+  .input-base:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(10,102,194,0.15);
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 24px;
+    padding: 0.625rem 1.5rem;
+    transition: background 0.15s ease, box-shadow 0.15s ease;
+    cursor: pointer;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--primary-hover);
+    box-shadow: var(--shadow-md);
+  }
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
