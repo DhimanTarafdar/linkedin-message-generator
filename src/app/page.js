@@ -67,7 +67,7 @@ export default function Home() {
         <div style={{ position: 'relative', maxWidth: '80rem', margin: '0 auto', padding: '0 1.25rem', textAlign: 'center' }}>
 
           {/* Pill badge */}
-          <div
+          {/* <div
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -87,7 +87,7 @@ export default function Home() {
           >
             <span style={{ width: '6px', height: '6px', borderRadius: '9999px', background: '#34d399', display: 'inline-block', animation: 'pulse 2s infinite' }} />
             AI-Powered · Free to Use
-          </div>
+          </div> */}
 
           {/* Heading */}
           <h1
@@ -178,9 +178,6 @@ export default function Home() {
             </span>
           </div>
 
-          <p style={{ fontSize: '0.75rem', color: '#94a3b8', textAlign: 'center' }}>
-            Made with ❤️ using AI · LinkedIn Message Generator v3.0
-          </p>
 
           <p style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
             © {new Date().getFullYear()} All rights reserved
