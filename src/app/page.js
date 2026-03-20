@@ -12,6 +12,7 @@ export default function Home() {
     <main style={{ minHeight: '100vh', backgroundColor: '#f8fafc' }}>
 
       {/* ── Hero Banner ── */}
+      {/* Header section */}
       <section
         style={{
           background: 'linear-gradient(135deg, #1d4ed8 0%, #4338ca 50%, #3730a3 100%)',
@@ -33,6 +34,7 @@ export default function Home() {
         />
 
         {/* Blob 1 */}
+
         <div
           style={{
             position: 'absolute',
