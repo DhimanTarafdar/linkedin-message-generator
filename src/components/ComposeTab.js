@@ -101,123 +101,117 @@ export default function ComposeTab() {
     senderData.company && senderData.background;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
       {/* Left Column - Input */}
-      <div className="space-y-6">
+      <div className="space-y-5">
         {/* Message Type Selection */}
-        <div className="bg-white rounded-2xl shadow-xl p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
-            <span className="text-2xl mr-3">📨</span>
+        <div className="li-card p-5">
+          <h2 className="li-section-title">
+            <span className="w-8 h-8 rounded-full bg-[#EAF0F9] flex items-center justify-center text-[#0A66C2] text-base">📨</span>
             Message Type নির্বাচন করুন
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button
               onClick={() => setMessageType('connection_request')}
-              className={`p-6 rounded-xl border-2 transition-all transform hover:scale-[1.02] ${messageType === 'connection_request'
-                  ? 'border-blue-600 bg-blue-50 shadow-lg'
-                  : 'border-gray-200 hover:border-blue-300'
-                }`}
+              className={`p-4 rounded-lg border-2 text-left transition-all ${
+                messageType === 'connection_request'
+                  ? 'border-[#0A66C2] bg-[#EAF0F9]'
+                  : 'border-[#E0E0E0] hover:border-[#0A66C2] hover:bg-[#EAF0F9]'
+              }`}
             >
-              <div className="flex items-start">
-                <div className="text-4xl mr-4">🤝</div>
-                <div className="text-left">
-                  <h3 className="text-lg font-bold text-gray-800 mb-1">Connection Request Note</h3>
-                  <p className="text-sm text-gray-600">প্রথম connection পাঠানোর সময় (300 chars limit)</p>
-                  <div className="mt-2 text-xs bg-blue-100 text-blue-700 inline-block px-3 py-1 rounded-full">
-                    50-60 words max
-                  </div>
-                </div>
-              </div>
+              <div className="text-2xl mb-2">🤝</div>
+              <h3 className="text-sm font-semibold text-[#191919] mb-1">Connection Request Note</h3>
+              <p className="text-xs text-[#666666] mb-2">প্রথম connection পাঠানোর সময়</p>
+              <span className="text-xs bg-[#EAF0F9] text-[#0A66C2] px-2 py-0.5 rounded-full font-medium border border-[#0A66C2]/20">
+                50-60 words max
+              </span>
             </button>
 
             <button
               onClick={() => setMessageType('direct_message')}
-              className={`p-6 rounded-xl border-2 transition-all transform hover:scale-[1.02] ${messageType === 'direct_message'
-                  ? 'border-purple-600 bg-purple-50 shadow-lg'
-                  : 'border-gray-200 hover:border-purple-300'
-                }`}
+              className={`p-4 rounded-lg border-2 text-left transition-all ${
+                messageType === 'direct_message'
+                  ? 'border-[#0A66C2] bg-[#EAF0F9]'
+                  : 'border-[#E0E0E0] hover:border-[#0A66C2] hover:bg-[#EAF0F9]'
+              }`}
             >
-              <div className="flex items-start">
-                <div className="text-4xl mr-4">💬</div>
-                <div className="text-left">
-                  <h3 className="text-lg font-bold text-gray-800 mb-1">Direct Message</h3>
-                  <p className="text-sm text-gray-600">Already connected হলে concise message পাঠান</p>
-                  <div className="mt-2 text-xs bg-purple-100 text-purple-700 inline-block px-3 py-1 rounded-full">
-                    80-150 words
-                  </div>
-                </div>
-              </div>
+              <div className="text-2xl mb-2">💬</div>
+              <h3 className="text-sm font-semibold text-[#191919] mb-1">Direct Message</h3>
+              <p className="text-xs text-[#666666] mb-2">Already connected হলে message পাঠান</p>
+              <span className="text-xs bg-[#EAF0F9] text-[#0A66C2] px-2 py-0.5 rounded-full font-medium border border-[#0A66C2]/20">
+                80-150 words
+              </span>
             </button>
           </div>
         </div>
 
         {/* Recipient Information */}
-        <div className="bg-white rounded-2xl shadow-xl p-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-            <span className="text-3xl mr-3">👤</span>
+        <div className="li-card p-5">
+          <h2 className="li-section-title">
+            <span className="w-8 h-8 rounded-full bg-[#EAF0F9] flex items-center justify-center text-[#0A66C2] text-base">👤</span>
             যাকে Message পাঠাবেন
           </h2>
-          <p className="text-sm text-gray-600 mb-6 bg-blue-50 p-3 rounded-lg border-l-4 border-blue-500">
+          <div className="li-info-banner">
             💡 LinkedIn profile থেকে এই তথ্যগুলো দেখে নিয়ে এখানে লিখুন
-          </p>
+          </div>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Name (নাম) *</label>
+              <label className="li-label">Name (নাম) *</label>
               <input
                 type="text"
                 name="name"
                 value={recipientData.name}
                 onChange={handleRecipientChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                className="li-input"
                 placeholder="e.g., Sarah Ahmed"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Job Title (পদবি) *</label>
+              <label className="li-label">Job Title (পদবি) *</label>
               <input
                 type="text"
                 name="jobTitle"
                 value={recipientData.jobTitle}
                 onChange={handleRecipientChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                className="li-input"
                 placeholder="e.g., Senior Product Manager"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Company (কোম্পানি) *</label>
+              <label className="li-label">Company (কোম্পানি) *</label>
               <input
                 type="text"
                 name="company"
                 value={recipientData.company}
                 onChange={handleRecipientChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                className="li-input"
                 placeholder="e.g., Google, Microsoft, Startup Name"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Key Skills/Expertise (দক্ষতা)</label>
+              <label className="li-label">Key Skills/Expertise (দক্ষতা)</label>
               <input
                 type="text"
                 name="skills"
                 value={recipientData.skills}
                 onChange={handleRecipientChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                className="li-input"
                 placeholder="e.g., AI/ML, Product Strategy"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Recent Activity/Posts (সাম্প্রতিক পোস্ট)</label>
+              <label className="li-label">Recent Activity/Posts (সাম্প্রতিক পোস্ট)</label>
               <textarea
                 name="recentActivity"
                 value={recipientData.recentActivity}
                 onChange={handleRecipientChange}
                 rows="3"
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition"
+                className="li-input resize-none"
                 placeholder="e.g., সম্প্রতি AI-powered feature নিয়ে post করেছেন..."
               />
             </div>
@@ -225,71 +219,71 @@ export default function ComposeTab() {
         </div>
 
         {/* Sender Information */}
-        <div className="bg-white rounded-2xl shadow-xl p-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
-            <span className="text-3xl mr-3">🙋‍♂️</span>
+        <div className="li-card p-5">
+          <h2 className="li-section-title">
+            <span className="w-8 h-8 rounded-full bg-[#EAF0F9] flex items-center justify-center text-[#0A66C2] text-base">🙋‍♂️</span>
             আপনার তথ্য
           </h2>
-          <p className="text-sm text-gray-600 mb-6 bg-green-50 p-3 rounded-lg border-l-4 border-green-500">
+          <div className="li-info-banner li-info-banner--success">
             💡 আপনার সম্পর্কে এবং কেন message পাঠাচ্ছেন সেটা বলুন
-          </p>
+          </div>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Your Name (আপনার নাম) *</label>
+              <label className="li-label">Your Name (আপনার নাম) *</label>
               <input
                 type="text"
                 name="name"
                 value={senderData.name}
                 onChange={handleSenderChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                className="li-input"
                 placeholder="e.g., Rakib Hassan"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Your Job Title (আপনার পদবি) *</label>
+              <label className="li-label">Your Job Title (আপনার পদবি) *</label>
               <input
                 type="text"
                 name="jobTitle"
                 value={senderData.jobTitle}
                 onChange={handleSenderChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                className="li-input"
                 placeholder="e.g., Software Engineer, Student"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Your Company (আপনার কোম্পানি) *</label>
+              <label className="li-label">Your Company (আপনার কোম্পানি) *</label>
               <input
                 type="text"
                 name="company"
                 value={senderData.company}
                 onChange={handleSenderChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                className="li-input"
                 placeholder="e.g., Tech Startup, University Name"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Your Background (আপনার পরিচয়) *</label>
+              <label className="li-label">Your Background (আপনার পরিচয়) *</label>
               <textarea
                 name="background"
                 value={senderData.background}
                 onChange={handleSenderChange}
                 rows="3"
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                className="li-input resize-none"
                 placeholder="e.g., 3 years experience in AI/ML, passionate about product development..."
               />
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Purpose (উদ্দেশ্য) *</label>
+              <label className="li-label">Purpose (উদ্দেশ্য) *</label>
               <select
                 name="purpose"
                 value={senderData.purpose}
                 onChange={handleSenderChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                className="li-input"
               >
                 <option value="collaboration">🤝 Collaboration খুঁজছি</option>
                 <option value="job_opportunity">💼 Job Opportunity</option>
@@ -301,13 +295,13 @@ export default function ComposeTab() {
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Specific Interest (নির্দিষ্ট কারণ)</label>
+              <label className="li-label">Specific Interest (নির্দিষ্ট কারণ)</label>
               <input
                 type="text"
                 name="specificInterest"
                 value={senderData.specificInterest}
                 onChange={handleSenderChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition"
+                className="li-input"
                 placeholder="e.g., তাদের AI project সম্পর্কে জানতে চাই"
               />
             </div>
@@ -318,40 +312,40 @@ export default function ComposeTab() {
         <button
           onClick={generateMessages}
           disabled={loading || !isFormValid}
-          className="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-bold py-5 rounded-xl hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 transition-all transform hover:scale-[1.02] shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          className="li-btn-primary w-full py-4 text-base"
         >
           {loading ? (
-            <span className="flex items-center justify-center">
-              <svg className="animate-spin h-6 w-6 mr-3" viewBox="0 0 24 24">
+            <>
+              <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
               AI Message তৈরি করছে...
-            </span>
+            </>
           ) : (
-            <span className="flex items-center justify-center text-lg">
-              <span className="text-2xl mr-3">⚡</span>
+            <>
+              <span>⚡</span>
               {messageType === 'connection_request' ? 'Connection Request Note তৈরি করুন' : 'Direct Message তৈরি করুন'}
-            </span>
+            </>
           )}
         </button>
       </div>
 
       {/* Right Column - Output */}
-      <div className="bg-white rounded-2xl shadow-xl p-6 lg:p-8 sticky top-6 h-fit">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-          <span className="text-3xl mr-3">✨</span>
+      <div className="li-card p-5 sticky top-6 h-fit">
+        <h2 className="li-section-title">
+          <span className="w-8 h-8 rounded-full bg-[#EAF0F9] flex items-center justify-center text-[#0A66C2] text-base">✨</span>
           Generated Messages
         </h2>
 
         {error && (
-          <div className="bg-red-50 border-2 border-red-200 rounded-xl p-6 text-center">
-            <div className="text-5xl mb-3">⚠️</div>
-            <h3 className="text-lg font-semibold text-red-800 mb-2">Error!</h3>
-            <p className="text-red-600 text-sm">{error}</p>
+          <div className="rounded-lg border border-[#CC1016]/30 bg-[#FFF0F0] p-5 text-center mb-4">
+            <div className="text-4xl mb-2">⚠️</div>
+            <h3 className="text-sm font-semibold text-[#CC1016] mb-1">Error!</h3>
+            <p className="text-[#CC1016] text-xs">{error}</p>
             <button
               onClick={() => setError(null)}
-              className="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+              className="mt-3 text-xs bg-[#CC1016] text-white px-4 py-1.5 rounded-full hover:bg-[#a30d12] transition"
             >
               Close
             </button>
@@ -359,12 +353,14 @@ export default function ComposeTab() {
         )}
 
         {!messages && !loading && !error && (
-          <div className="text-center py-16 text-gray-400">
-            <div className="text-7xl mb-4">📝</div>
-            <p className="text-xl font-medium mb-3">এখনো message তৈরি হয়নি</p>
-            <p className="text-sm mb-6">উপরের সব required (*) fields পূরণ করুন এবং Generate button এ click করুন</p>
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-xl border border-gray-200">
-              <p className="text-xs text-gray-600">
+          <div className="text-center py-14 text-[#666666]">
+            <div className="text-6xl mb-3">📝</div>
+            <p className="text-base font-medium mb-2 text-[#191919]">এখনো message তৈরি হয়নি</p>
+            <p className="text-xs mb-5 max-w-xs mx-auto">
+              উপরের সব required (*) fields পূরণ করুন এবং Generate button এ click করুন
+            </p>
+            <div className="bg-[#EAF0F9] rounded-lg p-4 border border-[#0A66C2]/20">
+              <p className="text-xs text-[#0A66C2]">
                 <strong>Tips:</strong> যত বেশি তথ্য দেবেন, তত ভালো personalized message পাবেন! 🎯
               </p>
             </div>
@@ -372,10 +368,10 @@ export default function ComposeTab() {
         )}
 
         {loading && (
-          <div className="text-center py-16">
-            <div className="inline-block animate-spin rounded-full h-20 w-20 border-b-4 border-indigo-600 mb-6"></div>
-            <p className="text-gray-700 font-bold text-lg mb-2">AI message তৈরি করছে...</p>
-            <p className="text-sm text-gray-500">
+          <div className="text-center py-14">
+            <div className="inline-block animate-spin rounded-full h-14 w-14 border-b-2 border-[#0A66C2] mb-5"></div>
+            <p className="text-sm font-semibold text-[#191919] mb-1">AI message তৈরি করছে...</p>
+            <p className="text-xs text-[#666666]">
               {messageType === 'connection_request'
                 ? 'সংক্ষিপ্ত এবং professional connection note লিখছে...'
                 : 'Concise এবং professional message তৈরি করছে...'}
@@ -384,10 +380,10 @@ export default function ComposeTab() {
         )}
 
         {messages && (
-          <div className="space-y-6">
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-xl border-2 border-green-200">
-              <p className="text-sm text-gray-700 font-medium flex items-center">
-                <span className="text-2xl mr-2">✅</span>
+          <div className="space-y-5">
+            <div className="bg-[#E8F5EF] rounded-lg p-3 border border-[#057642]/30 flex items-center gap-2">
+              <span className="text-lg">✅</span>
+              <p className="text-sm text-[#057642] font-medium">
                 {messageType === 'connection_request'
                   ? `${messages.length}টি Connection Request Note তৈরি হয়েছে!`
                   : `${messages.length}টি Direct Message তৈরি হয়েছে!`}
@@ -403,15 +399,13 @@ export default function ComposeTab() {
               />
             ))}
 
-            <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4">
-              <p className="text-sm text-gray-700 flex items-start">
-                <span className="text-2xl mr-3">💡</span>
-                <span>
-                  <strong>Pro Tip:</strong> Message copy করার আগে একবার পড়ে নিন এবং প্রয়োজনে নিজের মতো করে edit করে নিন।
-                  {messageType === 'connection_request'
-                    ? ' Connection Request এ maximum 300 characters allowed!'
-                    : ' সংক্ষিপ্ত message বেশি কার্যকর!'}
-                </span>
+            <div className="bg-[#FFF9F0] border border-[#915907]/30 rounded-lg p-4 flex items-start gap-3">
+              <span className="text-lg flex-shrink-0">💡</span>
+              <p className="text-xs text-[#666666]">
+                <strong className="text-[#191919]">Pro Tip:</strong> Message copy করার আগে একবার পড়ে নিন এবং প্রয়োজনে নিজের মতো করে edit করে নিন।
+                {messageType === 'connection_request'
+                  ? ' Connection Request এ maximum 300 characters allowed!'
+                  : ' সংক্ষিপ্ত message বেশি কার্যকর!'}
               </p>
             </div>
           </div>

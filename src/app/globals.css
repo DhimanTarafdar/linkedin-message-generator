@@ -3,21 +3,157 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --li-blue: #0A66C2;
+  --li-blue-dark: #004182;
+  --li-blue-light: #EAF0F9;
+  --li-bg: #F3F2EF;
+  --li-surface: #FFFFFF;
+  --li-border: #E0E0E0;
+  --li-border-input: #C5C5C5;
+  --li-text: #191919;
+  --li-text-muted: #666666;
+  --li-text-secondary: #0073B1;
+  --li-success: #057642;
+  --li-success-bg: #E8F5EF;
+  --li-error: #CC1016;
+  --li-error-bg: #FFF0F0;
+  --li-warning: #915907;
+  --li-warning-bg: #FFF9F0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: var(--li-text);
+  background-color: var(--li-bg);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Card component */
+.li-card {
+  background: var(--li-surface);
+  border: 1px solid var(--li-border);
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.04), 0 2px 8px rgba(0,0,0,.06);
+}
+
+/* Form input base */
+.li-input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--li-surface);
+  border: 1px solid var(--li-border-input);
+  border-radius: 4px;
+  font-size: 14px;
+  color: var(--li-text);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  font-family: inherit;
+}
+
+.li-input::placeholder {
+  color: #999;
+}
+
+.li-input:focus {
+  border-color: var(--li-blue);
+  box-shadow: 0 0 0 2px rgba(10, 102, 194, 0.18);
+}
+
+/* Primary button */
+.li-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--li-blue);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  font-family: inherit;
+}
+
+.li-btn-primary:hover:not(:disabled) {
+  background: var(--li-blue-dark);
+  box-shadow: 0 4px 12px rgba(10, 102, 194, 0.3);
+}
+
+.li-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Secondary button */
+.li-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: transparent;
+  color: var(--li-blue);
+  border: 1.5px solid var(--li-blue);
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  font-family: inherit;
+}
+
+.li-btn-secondary:hover:not(:disabled) {
+  background: var(--li-blue-light);
+}
+
+/* Label */
+.li-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--li-text);
+  margin-bottom: 6px;
+}
+
+/* Section heading */
+.li-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--li-text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+/* Info banner */
+.li-info-banner {
+  background: var(--li-blue-light);
+  border-left: 3px solid var(--li-blue);
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #0073B1;
+  margin-bottom: 20px;
+}
+
+/* Info banner — success variant */
+.li-info-banner--success {
+  background: var(--li-success-bg);
+  border-left-color: var(--li-success);
+  color: var(--li-success);
 }
 
 @layer utilities {

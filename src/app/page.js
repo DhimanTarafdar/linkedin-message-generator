@@ -9,16 +9,17 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('compose');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4 md:p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-[#F3F2EF] py-6 px-4 md:px-6">
+      <div className="max-w-6xl mx-auto">
         <Header activeTab={activeTab} setActiveTab={setActiveTab} />
-        
+
         {activeTab === 'compose' ? <ComposeTab /> : <ReplyTab />}
 
         {/* Footer */}
-        <div className="mt-12 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-2xl shadow-2xl p-8 text-center">
-          <p className="text-gray-300 mb-2">Made with ❤️ using Claude AI</p>
-          <p className="text-sm text-gray-400">LinkedIn Message Generator v3.0 - Professional Networking Tool</p>
+        <div className="mt-8 text-center py-4">
+          <p className="text-[13px] text-[#666666]">
+            Made with ❤️ using Claude AI &nbsp;·&nbsp; LinkedIn Message Generator v3.0
+          </p>
         </div>
       </div>
     </div>
