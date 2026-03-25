@@ -57,28 +57,6 @@ GROQ_API_KEY=your_api_key_here
 
 ---
 
-## Project Structure
-
-```
-src/
-├── app/
-│   ├── api/generate/     # API route for Groq
-│   ├── globals.css       # Global styles
-│   ├── layout.js         # Root layout
-│   └── page.js           # Main page
-├── components/
-│   ├── Navbar.jsx        # Navigation bar
-│   ├── Header.jsx        # Tab switcher
-│   ├── ComposeTab.jsx    # New message section
-│   ├── ReplyTab.jsx      # Reply section
-│   └── MessageCard.jsx   # Generated message card
-└── utils/
-    ├── promptBuilder.js  # AI prompt templates
-    └── helpers.js        # Utility functions
-```
-
----
-
 ## What I Learned
 
 Building this project taught me a lot:
