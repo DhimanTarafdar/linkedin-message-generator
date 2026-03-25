@@ -56,7 +56,3 @@ Building this project taught me a lot:
 Found a bug or have a feature idea? Feel free to open an issue or submit a pull request. All contributions are welcome.
 
 ---
-
----
-
-Built by [Dhiman Tarafdar](https://github.com/DhimanTarafdar)
