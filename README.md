@@ -35,13 +35,6 @@ For each type, the AI gives you **3 different variants** so you can pick the one
 | Vercel | Deployment |
 
 ---
-
-## Getting Started Locally
-
-### Prerequisites
-- Node.js 18+
-- A free [Groq API key](https://console.groq.com)
-
 ### Installation
 
 ```bash
