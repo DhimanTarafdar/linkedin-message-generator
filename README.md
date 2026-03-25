@@ -81,9 +81,6 @@ GROQ_API_KEY=your_api_key_here
 # Run the development server
 npm run dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
 ---
 
 ## Project Structure
