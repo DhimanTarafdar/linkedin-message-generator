@@ -2,8 +2,6 @@
 
 A free AI-powered web app that helps you write personalized LinkedIn messages in seconds — no more staring at a blank screen wondering what to say.
 
-**Live Demo:** [Try it here](http://linkedin-message-generator-j3dxu11tr-dhiman-tarafdars-projects.vercel.app)
-
 ---
 
 ## Why I Built This
