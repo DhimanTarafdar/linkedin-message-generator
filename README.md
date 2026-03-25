@@ -50,9 +50,3 @@ Building this project taught me a lot:
 - Deploying and managing a production app on Vercel
 
 ---
-
-## Contributing
-
-Found a bug or have a feature idea? Feel free to open an issue or submit a pull request. All contributions are welcome.
-
----
