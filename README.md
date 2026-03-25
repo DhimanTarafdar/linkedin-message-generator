@@ -33,10 +33,6 @@ For each type, the AI gives you **3 different variants** so you can pick the one
 | Shadcn UI | UI components |
 | Tailwind CSS v4 | Styling |
 | Vercel | Deployment |
-
----
-### Installation
-
 ---
 
 ## What I Learned
