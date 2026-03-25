@@ -23,20 +23,6 @@ Paste any message you received on LinkedIn and get a well-structured, profession
 
 For each type, the AI gives you **3 different variants** so you can pick the one that feels most natural to you.
 
----
-
-## How to Use It
-
-1. Open the [live app](http://linkedin-message-generator-j3dxu11tr-dhiman-tarafdars-projects.vercel.app)
-2. Select the message type you need
-3. Fill in the recipient's details (name, job title, company)
-4. Add your own details and purpose
-5. Click **Generate** and get your messages instantly
-6. Copy and send — done!
-
-No signup required. Completely free.
-
----
 
 ## Tech Stack
 
