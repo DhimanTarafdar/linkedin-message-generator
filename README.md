@@ -54,12 +54,7 @@ cp .env.example .env.local
 Add your Groq API key to `.env.local`:
 ```
 GROQ_API_KEY=your_api_key_here
-```
 
-```bash
-# Run the development server
-npm run dev
-```
 ---
 
 ## Project Structure
