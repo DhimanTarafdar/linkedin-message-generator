@@ -37,15 +37,6 @@ For each type, the AI gives you **3 different variants** so you can pick the one
 ---
 ### Installation
 
-```bash
-# Clone the repository
-git clone https://github.com/DhimanTarafdar/linkedin-message-generator.git
-
-# Navigate into the project
-cd linkedin-message-generator
-
-# Install dependencies
-npm insta
 ---
 
 ## What I Learned
