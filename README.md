@@ -57,10 +57,6 @@ Found a bug or have a feature idea? Feel free to open an issue or submit a pull 
 
 ---
 
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
 ---
 
 Built by [Dhiman Tarafdar](https://github.com/DhimanTarafdar)
